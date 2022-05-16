@@ -1,0 +1,51 @@
+﻿@using Lab4.Models
+@model IEnumerable<Lab4.Models.FriendModel>
+
+@{
+    ViewBag.Title = "Friends";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table id="friendsTable" class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Id)</td>
+            <td>@Html.DisplayNameFor(model => model.Ime)</td>
+            <td>@Html.DisplayNameFor(model => model.MestoZiveenje)</td>
+            <td>Manage</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (FriendModel friend in Model)
+        {
+            <tr>
+                <td>@friend.Id</td>
+                <td>@friend.Ime</td>
+                <td>@friend.MestoZiveenje</td>
+                <td class="text-center">
+                    @Html.ActionLink("Edit", "EditFriend", new { id = friend.Id }, new { @class = "btn btn-size btn-primary text-center" })
+                    @*@Html.ActionLink("Delete", "DeleteFriend", new { id = friend.Id }, new { @class = "btn btn-size btn-danger" })*@
+                    @Ajax.ActionLink("Delete", "DeleteFriend", 
+                            new { id = friend.Id }, 
+                            new AjaxOptions { HttpMethod = "DELETE", InsertionMode = InsertionMode.Replace }, 
+                            new { @class = "btn btn-size btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    .btn-size {
+        width: 100px;
+    }
+</style>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#friendsTable').DataTable();
+        });
+    </script>
+}

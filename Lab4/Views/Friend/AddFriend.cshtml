@@ -1,0 +1,41 @@
+﻿@model Lab4.Models.FriendModel
+
+@{
+    ViewBag.Title = "AddFriend";
+}
+
+<h2>Add a new friend</h2>
+
+@using (Html.BeginForm("AddFriend", "Friend"))
+{
+    /*
+    <div class="form-group">
+        @Html.LabelFor(friend => friend.Id)
+        @Html.TextBoxFor(friend => friend.Id, new { @class = "form-control" })
+        @Html.ValidationMessageFor(friend => friend.Id, "", new { @style = "color:red" })
+    </div> 
+    */
+
+    <div class="form-group">
+        @Html.LabelFor(friend => friend.Ime)
+        @Html.TextBoxFor(friend => friend.Ime, new { @class = "form-control" })
+        @Html.ValidationMessageFor(friend => friend.Ime, "", new { @style = "color:red" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(friend => friend.MestoZiveenje)
+        @Html.TextBoxFor(friend => friend.MestoZiveenje, new { @class = "form-control" })
+        @Html.ValidationMessageFor(friend => friend.MestoZiveenje, "", new { @style = "color:red" })
+    </div>
+
+    <div style="display: flex; justify-content: start">
+        <button type="submit" class="btn btn-success mr">Submit</button>
+        @Html.ActionLink("Back", "Index", "Friend", new { @class = "btn btn-primary mr" })
+    </div>
+}
+
+<style>
+    .mr {
+        margin-right: 10px;
+    }
+</style>
